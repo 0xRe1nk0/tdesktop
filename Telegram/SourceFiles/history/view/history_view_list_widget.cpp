@@ -3438,25 +3438,18 @@ void ListWidget::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
 		&& link->property(kFastShareProperty).value<bool>()
 		&& overItem) {
 		if (const auto view = viewForItem(overItem)) {
-			const auto rightSize = view->rightActionSize().value_or(QSize());
-			const auto parameters = view->reactionButtonParameters({}, {});
-			const auto reactionsSkip = view->embedReactionsInBubble()
-				? 0
-				: parameters.reactionsHeight;
-			const auto top = itemTop(view)
-				+ view->height()
-				- reactionsSkip
-				- parameters.keyboardHeight
-				- _visibleTop
-				- rightSize.height();
-			const auto right = rect::right(view->innerGeometry())
-				- st::historyFastShareLeft
-				- rightSize.width();
+			const auto geometry = view->primaryRightActionGeometry();
+			if (!geometry) {
+				return;
+			}
+			const auto point = QPoint(
+				geometry->left(),
+				itemTop(view) + geometry->top() - _visibleTop);
 			ShowTopPeersSelector(
 				this,
 				controller()->uiShow(),
 				overItem->fullId(),
-				parentWidget()->mapToGlobal(QPoint(right, top)));
+				parentWidget()->mapToGlobal(point));
 			return;
 		}
 	}

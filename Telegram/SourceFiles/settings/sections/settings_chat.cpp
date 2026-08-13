@@ -15,6 +15,7 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 #include "settings/sections/settings_local_storage.h"
 #include "settings/sections/settings_main.h"
 #include "settings/sections/settings_privacy_security.h"
+#include "settings/sections/settings_quick_destinations.h"
 #include "settings/settings_experimental.h"
 #include "settings/sections/settings_shortcuts.h"
 #include "boxes/abstract_box.h"
@@ -1124,6 +1125,18 @@ void BuildArchiveSection(SectionBuilder &builder) {
 	const auto session = builder.session();
 
 	builder.addSkip();
+
+	builder.addSectionButton({
+		.title = tr::lng_settings_quick_destinations(),
+		.targetSection = QuickDestinationsId(),
+		.icon = { &st::menuIconForward },
+		.keywords = {
+			u"quick"_q,
+			u"forward"_q,
+			u"destinations"_q,
+			u"chats"_q,
+		},
+	});
 
 	builder.addSectionButton({
 		.title = tr::lng_settings_shortcuts(),

@@ -691,6 +691,14 @@ https://github.com/telegramdesktop/tdesktop/blob/master/LEGAL
 "lng_settings_experimental_irrelevant" = "This option isn't relevant for your system.";
 
 "lng_settings_section_chat_settings" = "Chat Settings";
+"lng_settings_quick_destinations" = "Quick Destinations";
+"lng_settings_quick_destinations_chats" = "Destination chats";
+"lng_settings_quick_destinations_choose" = "Choose Chats";
+"lng_settings_quick_destinations_about" = "Choose private chats, groups, writable channels, or Saved Messages for quick forwarding. Unavailable chats are removed when you save.";
+"lng_quick_forward_tooltip" = "Quick Forward";
+"lng_quick_send_without_author_tooltip" = "Quick Send Without Author";
+"lng_quick_send_without_author_unavailable" = "The sender name can't be removed from this message.";
+"lng_quick_destinations_loading" = "Quick Destinations are still loading. Try again.";
 "lng_settings_replace_emojis" = "Replace emoji automatically";
 "lng_settings_system_text_replace" = "System text replacements";
 "lng_settings_suggest_emoji" = "Suggest emoji replacements";

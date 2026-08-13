@@ -631,6 +631,7 @@ public:
 		return 0;
 	}
 	[[nodiscard]] virtual std::optional<QSize> rightActionSize() const;
+	[[nodiscard]] virtual std::optional<QRect> primaryRightActionGeometry() const;
 	virtual void drawRightAction(
 		Painter &p,
 		const PaintContext &context,
@@ -638,7 +639,10 @@ public:
 		int top,
 		int outerWidth) const;
 	[[nodiscard]] virtual ClickHandlerPtr rightActionLink(
-		std::optional<QPoint> pressPoint) const;
+		QPoint point,
+		QPoint position,
+		int outerWidth,
+		QPoint viewOffset = {}) const;
 	[[nodiscard]] virtual TimeId displayedEditDate() const;
 	[[nodiscard]] virtual bool hasVisibleText() const;
 	[[nodiscard]] int textualMaxWidth() const;

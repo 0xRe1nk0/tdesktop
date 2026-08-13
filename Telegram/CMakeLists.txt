@@ -1002,6 +1002,8 @@ PRIVATE
     history/view/reactions/history_view_reactions_tabs.h
     history/view/history_view_top_peers_selector.cpp
     history/view/history_view_top_peers_selector.h
+    history/view/history_view_quick_destinations.cpp
+    history/view/history_view_quick_destinations.h
     history/view/history_view_about_view.cpp
     history/view/history_view_about_view.h
     history/view/history_view_bottom_info.cpp
@@ -1768,6 +1770,8 @@ PRIVATE
     settings/sections/settings_advanced.h
     settings/sections/settings_chat.cpp
     settings/sections/settings_chat.h
+    settings/sections/settings_quick_destinations.cpp
+    settings/sections/settings_quick_destinations.h
     settings/sections/settings_blocked_peers.cpp
     settings/sections/settings_blocked_peers.h
     settings/sections/settings_business.cpp

@@ -124,6 +124,11 @@ public:
 	[[nodiscard]] qint32 subsectionTabsMode(PeerId peerId) const;
 	void setSubsectionTabsMode(PeerId peerId, qint32 mode);
 
+	[[nodiscard]] const std::vector<PeerId> &quickDestinationIds() const {
+		return _quickDestinationIds;
+	}
+	void setQuickDestinationIds(std::vector<PeerId> ids);
+
 	[[nodiscard]] bool dialogsFiltersEnabled() const {
 		return _dialogsFiltersEnabled;
 	}
@@ -222,6 +227,7 @@ private:
 	rpl::variable<bool> _archiveInMainMenu = false;
 	base::flat_map<ThreadId, MsgId> _hiddenPinnedMessages;
 	base::flat_map<PeerId, qint32> _subsectionTabsModes;
+	std::vector<PeerId> _quickDestinationIds;
 	base::flat_map<Data::DefaultNotify, ushort> _ringtoneDefaultVolumes;
 	base::flat_map<ThreadId, ushort> _ringtoneVolumes;
 	bool _dialogsFiltersEnabled = false;

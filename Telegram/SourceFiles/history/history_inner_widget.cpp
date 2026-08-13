@@ -2791,25 +2791,18 @@ void HistoryInner::showContextMenu(QContextMenuEvent *e, bool showFromTouch) {
 	} else if (link && link->property(kFastShareProperty).value<bool>()) {
 		if (const auto item = _dragStateItem) {
 			const auto view = viewByItem(item);
-			const auto rightSize = view->rightActionSize().value_or(QSize());
-			const auto parameters = view->reactionButtonParameters({}, {});
-			const auto reactionsSkip = view->embedReactionsInBubble()
-				? 0
-				: parameters.reactionsHeight;
-			const auto top = itemTop(view)
-				+ view->height()
-				- reactionsSkip
-				- parameters.keyboardHeight
-				- _visibleAreaTop
-				- rightSize.height();
-			const auto right = rect::right(view->innerGeometry())
-				- st::historyFastShareLeft
-				- rightSize.width();
+			const auto geometry = view->primaryRightActionGeometry();
+			if (!geometry) {
+				return;
+			}
+			const auto point = QPoint(
+				geometry->left(),
+				itemTop(view) + geometry->top() - _visibleAreaTop);
 			HistoryView::ShowTopPeersSelector(
 				this,
 				_controller->uiShow(),
 				item->fullId(),
-				parentWidget()->mapToGlobal(QPoint(right, top)));
+				parentWidget()->mapToGlobal(point));
 			return;
 		}
 	}
