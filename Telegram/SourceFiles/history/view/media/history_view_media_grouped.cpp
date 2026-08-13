@@ -582,9 +582,12 @@ TextState GroupedMedia::textState(QPoint point, StateRequest request) const {
 				? (-size->width() - st::historyFastShareLeft)
 				: (fullRight + st::historyFastShareLeft);
 			auto fastShareTop = (fullBottom - st::historyFastShareBottom - size->height());
-			if (QRect(fastShareLeft, fastShareTop, size->width(), size->height()).contains(point)) {
-				result.link = _parent->rightActionLink(point
-					- QPoint(fastShareLeft, fastShareTop));
+			if (const auto actionLink = _parent->rightActionLink(
+					point,
+					{ fastShareLeft, fastShareTop },
+					width(),
+					_parent->mediaTopLeft())) {
+				result.link = actionLink;
 			}
 		}
 	}

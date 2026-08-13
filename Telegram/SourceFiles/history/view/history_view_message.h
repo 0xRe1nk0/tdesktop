@@ -34,6 +34,7 @@ class ViewButton;
 class WebPage;
 class TranscribeButton;
 class Message;
+enum class QuickDestinationAction : uchar;
 
 namespace Reactions {
 class InlineList;
@@ -254,6 +255,7 @@ public:
 	int minWidthForMedia() const override;
 	bool displayRightActionComments() const;
 	std::optional<QSize> rightActionSize() const override;
+	std::optional<QRect> primaryRightActionGeometry() const override;
 	void drawRightAction(
 		Painter &p,
 		const PaintContext &context,
@@ -261,7 +263,10 @@ public:
 		int top,
 		int outerWidth) const override;
 	[[nodiscard]] ClickHandlerPtr rightActionLink(
-		std::optional<QPoint> pressPoint) const override;
+		QPoint point,
+		QPoint position,
+		int outerWidth,
+		QPoint viewOffset = {}) const override;
 	[[nodiscard]] TimeId displayedEditDate() const override;
 	[[nodiscard]] bool toggleSelectionByHandlerClick(
 		const ClickHandlerPtr &handler) const override;
@@ -299,6 +304,8 @@ private:
 	struct LinkRipple;
 	struct FromNameStatus;
 	struct RightAction;
+	struct RightActionLayout;
+	struct RightActionGeometry;
 
 	void refreshDataIdHook() override;
 	bool hasHeavyPart() const override;
@@ -348,6 +355,13 @@ private:
 
 	void toggleRightActionRipple(bool pressed);
 	void toggleBadgeRipple(bool pressed);
+	[[nodiscard]] RightActionLayout computeRightActionLayout() const;
+	[[nodiscard]] RightActionGeometry computeRightActionGeometry(
+		QPoint position,
+		int outerWidth) const;
+	[[nodiscard]] int quickRightActionReserve() const;
+	[[nodiscard]] ClickHandlerPtr prepareQuickDestinationLink(
+		QuickDestinationAction action) const;
 
 	void toggleReplyRipple(bool pressed);
 	void toggleSummaryHeaderRipple(bool pressed);

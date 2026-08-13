@@ -2600,6 +2600,10 @@ std::optional<QSize> Element::rightActionSize() const {
 	return std::nullopt;
 }
 
+std::optional<QRect> Element::primaryRightActionGeometry() const {
+	return std::nullopt;
+}
+
 void Element::drawRightAction(
 	Painter &p,
 	const PaintContext &context,
@@ -2609,7 +2613,10 @@ void Element::drawRightAction(
 }
 
 ClickHandlerPtr Element::rightActionLink(
-		std::optional<QPoint> pressPoint) const {
+		QPoint point,
+		QPoint position,
+		int outerWidth,
+		QPoint viewOffset) const {
 	return ClickHandlerPtr();
 }
 
