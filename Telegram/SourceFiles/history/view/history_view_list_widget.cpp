@@ -5224,6 +5224,8 @@ void ListWidget::overrideChatMode(std::optional<ElementChatMode> mode) {
 }
 
 ListWidget::~ListWidget() {
+	ClickHandler::clearActive();
+
 	// Destroy child widgets first, because they may invoke leaveEvent-s.
 	_emptyInfo = nullptr;
 	if (const auto raw = _menu.release()) {
